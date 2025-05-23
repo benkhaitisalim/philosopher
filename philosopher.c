@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:01:16 by bsalim            #+#    #+#             */
-/*   Updated: 2025/05/23 10:11:36 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/05/23 20:29:14 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int initialization_struct(t_data *data)
         return -1;
     }
 
-    // Initialize forks
     for (int i = 0; i < data->number_of_philosophers; i++) {
         if (pthread_mutex_init(&data->forks[i], NULL) != 0) {
             fprintf(stderr, "Error: Failed to initialize fork %d mutex.\n", i);
@@ -85,25 +84,32 @@ int initialization_struct(t_data *data)
 
     return 0;
 }
-void create_thread(t_data *data)
+int create_thread(t_data *data)
 {
 	int i = 0;
+    if(data->number_of_philosophers == 1)
+    {
+        if(pthread_create(&data->philosophers[i].thread,NULL,routine_philo,&data->philosophers[i]) != 0)
+			return -1;
+    }
 	while(i < data->number_of_philosophers)
 	{
 		if(pthread_create(&data->philosophers[i].thread,NULL,routine_philo,&data->philosophers[i]) != 0)
-			return ;
+			return -1;
 		i++;
 	}
+    return 0;
 }
-void join_pthread(t_data *data)
+int join_pthread(t_data *data)
 {
 	int i = 0;
 	while(i < data->number_of_philosophers)
 	{
 		if(pthread_join(data->philosophers[i].thread,NULL) != 0)
-			return;
+			return -1;
 		i++;
-	}	
+    }
+    return 0;
 }
 void free_pthread(t_data *data)
 {

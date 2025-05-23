@@ -37,6 +37,6 @@ int	initialization_struct(t_data *data);
 int parsing(t_data *data,char **av);
 /* rotine philosopher*/
 void *routine_philo(void *pointer);
-void create_thread(t_data *data);
-void join_pthread(t_data *data);
+int create_thread(t_data *data);
+int join_pthread(t_data *data);
 void free_pthread(t_data *data);

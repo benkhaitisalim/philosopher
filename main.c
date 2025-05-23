@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:38:47 by bsalim            #+#    #+#             */
-/*   Updated: 2025/05/23 17:38:30 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/05/23 20:29:43 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,16 @@ int main(int ac, char **av)
         free(data);
         return 1;
     }
-    create_thread(data);
-    join_pthread(data);
+    if(create_thread(data) == -1)
+    {
+        return 1;
+    }
+    if(join_pthread(data) == -1)
+    {
+        return 1;
+    }
     // stop_simulation(data);
     free_pthread(data);
-    free(data);
     
     return 0;
 }

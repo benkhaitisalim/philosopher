@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:07 by bsalim            #+#    #+#             */
-/*   Updated: 2025/05/23 17:51:59 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/05/23 19:09:07 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,14 @@ void *routine_philo(void *pointer)
         return NULL;
     }
     long time = get_current_time();
-    while (!philo->data->flag_stop_sumilation)
+    while (1)
     {
         usleep(philo->id * 200);
         printf("%ld %d thinking\n", get_current_time() - time, philo->id);
         usleep(500000);
-
         if (philo->id % 2 == 0) 
         {
-            usleep(100);
+            usleep(200);
             pthread_mutex_lock(philo->left_fork);
             printf("%zu %d pick up left_fork\n", get_current_time() - time, philo->id);
             pthread_mutex_lock(philo->right_fork);
