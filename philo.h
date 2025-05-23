@@ -23,7 +23,7 @@ typedef struct  {
 typedef struct t_philo{
     int id;
     int meals_eaten;
-    int last_meals;
+    long last_meals;
     pthread_t thread;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
