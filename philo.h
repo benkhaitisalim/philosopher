@@ -8,10 +8,13 @@
 typedef struct t_philo t_philo;
 typedef struct  {
     int number_of_philosophers; //ARGV[1]
-    int time_to_die; // ARG[2]
+    long time_to_die; // ARG[2]
     long time_to_eat; // ARG[3]
-    int time_to_sleep; // ARGV[4]
+    long time_to_sleep; // ARGV[4]
+    int most_meals_should_philo_eat; // ARG[5]
     int flag_stop_sumilation;
+    pthread_mutex_t print_mutex;
+    pthread_mutex_t fork;
 
     pthread_mutex_t protect_stop_sumilation;
     pthread_mutex_t *forks;
@@ -31,10 +34,9 @@ typedef struct t_philo{
 } t_philo;
 # endif
 
-void stop_simulation(t_data *data);
 /* create  and initialization off threads*/
 int	initialization_struct(t_data *data);
-int parsing(t_data *data,char **av);
+int parsing(t_data *data,char **av,int ac);
 /* rotine philosopher*/
 void *routine_philo(void *pointer);
 int create_thread(t_data *data);

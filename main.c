@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:38:47 by bsalim            #+#    #+#             */
-/*   Updated: 2025/05/23 20:29:43 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/05/31 21:00:01 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 int main(int ac, char **av)
 {
-    if (ac != 5) {
+    if (ac < 5 || ac > 6)
+    {
         printf("Error: Incorrect number of arguments.\n");
         return 1;
     }
@@ -25,7 +26,7 @@ int main(int ac, char **av)
         return 1;
     }
 
-    if (parsing(data, av) == -1) {
+    if (parsing(data, av, ac) == -1) {
         printf("Error: Invalid input detected.\n");
         free_pthread(data);
         free(data);
@@ -44,7 +45,6 @@ int main(int ac, char **av)
     {
         return 1;
     }
-    // stop_simulation(data);
     free_pthread(data);
     
     return 0;

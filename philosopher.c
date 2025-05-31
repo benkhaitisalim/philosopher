@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:01:16 by bsalim            #+#    #+#             */
-/*   Updated: 2025/05/23 20:29:14 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/05/31 20:56:22 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int initialization_struct(t_data *data)
         return -1;
     }
 
-    // Allocate memory for philosopher structures
     data->philosophers = malloc(sizeof(t_philo) * data->number_of_philosophers);
     if (!data->philosophers) {
         free(data->forks);
@@ -38,7 +37,6 @@ int initialization_struct(t_data *data)
         return -1;
     }
 
-    // Initialize mutexes safely
     if (pthread_mutex_init(&data->meals_mutex, NULL) != 0) {
         fprintf(stderr, "Error: Failed to initialize meals mutex.\n");
         free(data->forks);
@@ -46,7 +44,15 @@ int initialization_struct(t_data *data)
         free(data->philosophers);
         return -1;
     }
-
+    if (pthread_mutex_init(&data->forks[0], NULL) != 0) 
+    {
+        pthread_mutex_destroy(&data->meals_mutex);
+        pthread_mutex_destroy(&data->protect_stop_sumilation);
+        free(data->forks);
+        free(data->meals_philo_eats);
+        free(data->philosophers);
+        return -1;
+    }
     if (pthread_mutex_init(&data->protect_stop_sumilation, NULL) != 0) {
         fprintf(stderr, "Error: Failed to initialize stop simulation mutex.\n");
         pthread_mutex_destroy(&data->meals_mutex);
@@ -59,7 +65,6 @@ int initialization_struct(t_data *data)
     for (int i = 0; i < data->number_of_philosophers; i++) {
         if (pthread_mutex_init(&data->forks[i], NULL) != 0) {
             fprintf(stderr, "Error: Failed to initialize fork %d mutex.\n", i);
-            // Cleanup previously initialized mutexes
             for (int j = 0; j < i; j++)
                 pthread_mutex_destroy(&data->forks[j]);
             pthread_mutex_destroy(&data->meals_mutex);
