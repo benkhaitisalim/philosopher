@@ -1,7 +1,7 @@
 NAME = philosopher
 CC = cc
 FLAGS = -Wall -Wextra -Werror 
-FILE =  main.c simulation.c philosopher.c parsing.c
+FILE =  main.c simulation.c philosopher.c parsing.c helper_function.c sumilation_function.c
 OBJ = $(FILE:.c=.o)
 
 all : $(NAME)

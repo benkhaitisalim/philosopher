@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:38:47 by bsalim            #+#    #+#             */
-/*   Updated: 2025/05/31 21:00:01 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/01 13:10:01 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int ac, char **av)
         printf("Error: Memory allocation for `data` failed.\n");
         return 1;
     }
-
+    
     if (parsing(data, av, ac) == -1) {
         printf("Error: Invalid input detected.\n");
         free_pthread(data);
