@@ -33,9 +33,12 @@ typedef struct t_philo{
 # endif
 
 /* create  and initialization off threads*/
-int	initialization_struct(t_data *data);
+int	initialization_struct_part1(t_data *data);
+int	initialization_struct_part2(t_data *data);
 long ft_longatol(const char *str);
 int parsing(t_data *data,char **av,int ac);
+int init_philos(t_data *data);
+int	init_pthread_mutex(t_data *data);
 /* rotine philosopher*/
 void *routine_philo(void *pointer);
 int create_thread(t_data *data);
@@ -47,3 +50,4 @@ void print_(t_philo *philo,long time,char *message);
 int check_dead(t_philo *philo);
 int most_meals_should_philo_eat(t_philo *philo);
 int is_sumilation_ok(t_data *data);
+int	one_philo_rotine(t_data *data);
