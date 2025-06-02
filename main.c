@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:38:47 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 13:58:04 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/02 16:25:41 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 		return (-1);
 	if (initialization_struct_part1(data) == -1 || init_philos(data) == -1
 		|| init_pthread_mutex(data) == -1
-		|| initialization_struct_part2(data) == -1) 
+		|| initialization_struct_part2(data) == -1)
 	{
 		printf("Error: Memory allocation failed during initialization.\n");
 		return (-1);
