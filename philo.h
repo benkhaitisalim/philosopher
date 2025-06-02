@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 17:09:29 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/02 18:57:11 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_data {
 	int				number_of_philosophers;
-	long int		time_to_die;
-	long int		time_to_eat;
+	long			time_to_die;
+	long			time_to_eat;
 	long int		time_to_sleep;
 	int				most_meals_should_philo_eat;
 	int				flag_stop_sumilation;
