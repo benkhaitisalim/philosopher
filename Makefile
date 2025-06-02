@@ -1,6 +1,6 @@
 NAME = philosopher
 CC = cc
-FLAGS = -Wall -Wextra -Werror -fsanitize=thread 
+FLAGS = -Wall -Wextra -Werror 
 FILE =  main.c simulation.c philosopher.c parsing.c helper_function.c sumilation_function.c init_struct.c
 OBJ = $(FILE:.c=.o)
 

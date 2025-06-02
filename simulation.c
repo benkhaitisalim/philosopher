@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:07 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 13:02:02 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/02 17:10:42 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*routine_philo(void *pointer)
 
 	philo = (t_philo *)pointer;
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		usleep(philo->data->time_to_eat);
 	while (is_sumilation_ok(philo->data))
 	{
 		print_(philo, philo->data->time_to_start, "thinking");

@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:58:49 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 12:53:21 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/02 17:11:23 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	philo_eat(t_philo *philo)
 int	check_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->protect_stop_sumilation);
-	if (get_current_time() - philo->data->time_to_start 
+	if (get_current_time() - philo->data->time_to_start
 		> philo->data->time_to_die)
 	{
 		if (!philo->data->flag_stop_sumilation) 

@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 15:08:46 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/02 17:09:29 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 typedef struct s_data {
 	int				number_of_philosophers;
-	long			time_to_die;
-	long			time_to_eat;
-	long			time_to_sleep;
+	long int		time_to_die;
+	long int		time_to_eat;
+	long int		time_to_sleep;
 	int				most_meals_should_philo_eat;
 	int				flag_stop_sumilation;
 	long			time_to_start;
@@ -37,7 +37,7 @@ typedef struct s_data {
 typedef struct t_philo{
 	int				id;
 	int				meals_eaten;
-	long			last_meals;
+	long int		last_meals;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -58,7 +58,7 @@ long	get_current_time(void);
 int		join_pthread(t_data *data);
 void	free_pthread(t_data *data);
 void	philo_eat(t_philo *philo);
-void	print_(t_philo *philo, long time, char *message);
+void	print_(t_philo *philo, long int time, char *message);
 int		check_dead(t_philo *philo);
 int		most_meals_should_philo_eat(t_philo *philo);
 int		is_sumilation_ok(t_data *data);
