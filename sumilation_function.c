@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:58:49 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 17:11:23 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/03 17:26:35 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_sumilation_ok(t_data *data)
 void	print_(t_philo *philo, long time, char *message)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%d %zu %s\n", philo->id, get_current_time() - time, message);
+	printf("%zu %d %s\n", get_current_time() - time, philo->id, message);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
@@ -34,19 +34,19 @@ void	philo_eat(t_philo *philo)
 	if (philo->id % 2 == 0) 
 	{
 		pthread_mutex_lock(philo->left_fork);
-		print_(philo, philo->data->time_to_start, "pick up left fork");
+		print_(philo, philo->data->time_to_start, "has taken a fork");
 		pthread_mutex_lock(philo->right_fork);
-		print_(philo, philo->data->time_to_start, "pick up right fork");
+		print_(philo, philo->data->time_to_start, "has taken a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(philo->right_fork);
-		print_(philo, philo->data->time_to_start, "pick up right fork");
+		print_(philo, philo->data->time_to_start, "has taken a fork");
 		pthread_mutex_lock(philo->left_fork);
-		print_(philo, philo->data->time_to_start, "pick up left fork");
+		print_(philo, philo->data->time_to_start, "has taken a fork");
 	}
+	print_(philo, philo->data->time_to_start, "is eating");
 	usleep(philo->data->time_to_eat);
-	print_(philo, philo->data->time_to_start, "eating");
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
@@ -55,12 +55,12 @@ int	check_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->protect_stop_sumilation);
 	if (get_current_time() - philo->data->time_to_start
-		> philo->data->time_to_die)
+		>= philo->data->time_to_die)
 	{
 		if (!philo->data->flag_stop_sumilation) 
 		{
 			philo->data->flag_stop_sumilation = 1;
-			print_(philo, philo->data->time_to_start, "die");
+			print_(philo, philo->data->time_to_start, "died");
 		}
 		pthread_mutex_unlock(&philo->data->protect_stop_sumilation);
 		return (-1);
@@ -79,7 +79,6 @@ int	most_meals_should_philo_eat(t_philo *philo)
 		if (philo->meals_eaten == philo->data->most_meals_should_philo_eat)
 		{
 			pthread_mutex_unlock (&philo->data->meals_mutex);
-			pthread_mutex_destroy(&philo->data->meals_mutex);
 			return (-1);
 		}
 	}
