@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 01:07:32 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 17:08:09 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:41:25 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@ int	parsing(t_data *data, char **av, int ac)
 	if (ac == 5)
 	{
 		data->number_of_philosophers = ft_longatol(av[1]);
-		data->time_to_die = ft_longatol(av[2]) * 1000;
-		data->time_to_eat = ft_longatol(av[3]) * 1000;
-		data->time_to_sleep = ft_longatol(av[4]) * 1000;
+		data->time_to_die = ft_longatol(av[2]);
+		data->time_to_eat = ft_longatol(av[3]) ;
+		data->time_to_sleep = ft_longatol(av[4]);
 	}
 	else 
 	{
 		data->number_of_philosophers = ft_longatol(av[1]);
-		data->time_to_die = ft_longatol(av[2]) * 1000;
-		data->time_to_eat = ft_longatol(av[3]) * 1000;
-		data->time_to_sleep = ft_longatol(av[4]) * 1000;
+		data->time_to_die = ft_longatol(av[2]);
+		data->time_to_eat = ft_longatol(av[3]) ;
+		data->time_to_sleep = ft_longatol(av[4]) ;
 		data->most_meals_should_philo_eat = ft_longatol(av[5]);
 		if (data->most_meals_should_philo_eat <= 0)
 			return (-1);
 	}
+	data->seaters_on_table = 1;
 	data->time_to_start = get_current_time();
 	if (data->number_of_philosophers <= 0 || data->number_of_philosophers > 200)
 		return (-1);

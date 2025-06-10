@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/03 17:30:10 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/09 15:59:17 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_data {
 	int				flag_stop_sumilation;
 	long			time_to_start;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	mutex_service;
+	int				seaters_on_table;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	protect_stop_sumilation;
 	pthread_mutex_t	*forks;
@@ -37,8 +39,8 @@ typedef struct s_data {
 }	t_data;
 typedef struct t_philo{
 	int				id;
-	int				meals_eaten;
 	long			last_meals;
+	int				meals_eaten;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -57,8 +59,9 @@ void	*routine_philo(void *pointer);
 int		create_thread(t_data *data);
 long	get_current_time(void);
 int		join_pthread(t_data *data);
+void	ft_usleep(long time);
 void	free_pthread(t_data *data);
-void	philo_eat(t_philo *philo);
+// void	philo_eat(t_philo *philo);
 void	print_(t_philo *philo, long time, char *message);
 int		check_dead(t_philo *philo);
 int		most_meals_should_philo_eat(t_philo *philo);

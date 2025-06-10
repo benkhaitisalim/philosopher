@@ -6,34 +6,29 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:01:16 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/03 16:35:59 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/07 20:04:32 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	one_philo_rotine(t_data *data)
+void	*one_philo_rine(void *dat)
 {
-	if (data->number_of_philosophers == 1) 
+	t_philo *philo = (t_philo*)dat;
+	if (philo->data->number_of_philosophers == 1) 
 	{
-		print_(data->philosophers,
-			data->philosophers->data->time_to_start, "is thinking");
-		pthread_mutex_lock(data->philosophers->right_fork);
-		print_(data->philosophers, data->philosophers->data->time_to_start,
+		print_(philo->data->philosophers,
+			philo->data->philosophers->data->time_to_start, "is thinking");
+		pthread_mutex_lock(philo->data->philosophers->right_fork);
+		print_(philo->data->philosophers, philo->data->philosophers->data->time_to_start,
 			"has taken a fork");
-		if (get_current_time() - data->philosophers->data->time_to_start
-			<= data->philosophers->data->time_to_die)
-			usleep(data->philosophers->data->time_to_die);
-		print_(data->philosophers,
-			data->philosophers->data->time_to_start, "died");
-		pthread_mutex_unlock(data->philosophers->right_fork);
-		pthread_mutex_destroy
-			(&data->philosophers->data->meals_mutex);
-		pthread_mutex_destroy
-			(&data->philosophers->data->protect_stop_sumilation);
-		return (-1);
+		usleep(philo->data->philosophers->data->time_to_die * 1000);
+		print_(philo->data->philosophers,
+			philo->data->philosophers->data->time_to_start, "died");
+		pthread_mutex_unlock(philo->data->philosophers->right_fork);
+		return (NULL);
 	}
-	return (1);
+	return NULL;
 }
 
 int	create_thread(t_data *data)
@@ -41,6 +36,12 @@ int	create_thread(t_data *data)
 	int	i;
 
 	i = 0;
+	if(data->number_of_philosophers == 1)
+	{
+		pthread_create(&data->philosophers[0].thread, NULL,one_philo_rine, &data->philosophers[0]);
+		pthread_join(data->philosophers[0].thread, NULL);
+		return 0;
+	}
 	while (i < data->number_of_philosophers)
 	{
 		if (pthread_create(&data->philosophers[i].thread, NULL,

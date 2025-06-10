@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:16:35 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/02 13:33:28 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/09 15:28:18 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,12 @@ long	get_current_time(void)
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
+
+void	ft_usleep(long time)
+{
+	long start = get_current_time();
+	while(get_current_time() - start <= time)
+	{
+		usleep(100);
+	}
+} 
