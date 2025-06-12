@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/09 15:59:17 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:39:21 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_usleep(long time);
 void	free_pthread(t_data *data);
 // void	philo_eat(t_philo *philo);
 void	print_(t_philo *philo, long time, char *message);
-int		check_dead(t_philo *philo);
+void	*check_dead(void *ptr);
 int		most_meals_should_philo_eat(t_philo *philo);
 int		is_sumilation_ok(t_data *data);
 int		one_philo_rotine(t_data *data);

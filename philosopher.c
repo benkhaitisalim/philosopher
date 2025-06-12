@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:01:16 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/07 20:04:32 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:41:57 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	create_thread(t_data *data)
 	int	i;
 
 	i = 0;
-	if(data->number_of_philosophers == 1)
-	{
-		pthread_create(&data->philosophers[0].thread, NULL,one_philo_rine, &data->philosophers[0]);
-		pthread_join(data->philosophers[0].thread, NULL);
-		return 0;
-	}
+	// if(data->number_of_philosophers == 1)
+	// {
+	// 	pthread_create(&data->philosophers[0].thread, NULL,one_philo_rine, &data->philosophers[0]);
+	// 	pthread_join(data->philosophers[0].thread, NULL);
+	// 	return 0;
+	// }
 	while (i < data->number_of_philosophers)
 	{
 		if (pthread_create(&data->philosophers[i].thread, NULL,
@@ -49,6 +49,25 @@ int	create_thread(t_data *data)
 			return (-1);
 		i++;
 	}
+	pthread_t monitor;
+	if (pthread_create(&monitor, NULL,
+				check_dead, &data->philosophers[0]) != 0)
+	i = 0;
+	// if(data->number_of_philosophers == 1)
+	// {
+	// 	pthread_create(&data->philosophers[0].thread, NULL,one_philo_rine, &data->philosophers[0]);
+	// 	pthread_join(data->philosophers[0].thread, NULL);
+	// 	return 0;
+	// }
+	while (i < data->number_of_philosophers)
+	{
+		if (pthread_create(&data->philosophers[i].thread, NULL,
+				routine_philo, &data->philosophers[i]) != 0)
+			return (-1);
+		i++;
+	}
+	if (pthread_join(monitor,  NULL) != 0)
+			return (-1);
 	return (0);
 }
 

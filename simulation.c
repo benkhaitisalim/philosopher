@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:07 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/10 17:34:16 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:46:42 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ void	pick_up_forks(t_philo *philo)
 	print_(philo, philo->data->time_to_start, "has taken a fork");
 	pthread_mutex_lock(secound);
 	print_(philo, philo->data->time_to_start, "has taken a fork");
-	eat(philo);
-	if(get_current_time() - philo->data->time_to_start >= philo->data->time_to_eat)
-	{
-		put_down_forks(philo);
-	}
-
 }
 void	*routine_philo(void *pointer)
 {
@@ -88,6 +82,7 @@ void	*routine_philo(void *pointer)
 		}
 		pick_up_forks(philo);
 		put_down_forks(philo);
+		eat(philo);
 		get_up_from_table(philo);
 		if(most_meals_should_philo_eat(philo)  == -1)
 		{
@@ -97,12 +92,10 @@ void	*routine_philo(void *pointer)
 		print_(philo, philo->data->time_to_start, "is sleeping");
 		ft_usleep(philo->data->time_to_sleep);
 		print_(philo, philo->data->time_to_start, "is thinking");
-		if(last_meals > 0)
+		if(last_meals > philo->data->time_to_eat)
 		{
 			ft_usleep(last_meals);
 		}
-		if (check_dead(philo) == -1)
-			return NULL;
 	}
 	return (NULL);
 }

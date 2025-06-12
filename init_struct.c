@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:28:44 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/09 13:49:11 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:45:39 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	init_philos(t_data *data)
 	{
 		data->philosophers[j].id = j + 1;
 		data->philosophers[j].meals_eaten = 0;
-		data->philosophers[j].last_meals = 0;
+		data->philosophers[j].last_meals = get_current_time();
 		data->philosophers[j].left_fork = &data->forks[j];
 		data->philosophers[j].right_fork = &data->forks[(j + 1)
 			% data->number_of_philosophers];
