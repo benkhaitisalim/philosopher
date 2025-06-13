@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:28:44 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/12 13:45:39 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/13 22:18:06 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,7 @@ int	init_pthread_mutex(t_data *data)
 		{
 			j = 0;
 			printf("Error: Failed to initialize fork %d mutex.\n", i);
-			while (j < i)
-			{
-				pthread_mutex_destroy(&data->forks[j]);
-				j++;
-			}
-			pthread_mutex_destroy(&data->print_mutex);
-			pthread_mutex_destroy(&data->meals_mutex);
-			pthread_mutex_destroy(&data->protect_stop_sumilation);
-			free(data->forks);
-			free(data->philosophers);
+			free_pthread(data);
 			return (-1);
 		}
 		i++;

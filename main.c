@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:38:47 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/03 17:29:22 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/13 18:28:37 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int ac, char **av)
 		printf("memory allocation for  failed.\n");
 		return (-1);
 	}
+	ft_time(data);
 	memset(data, 0, sizeof(t_data));
 	if (check_arg_ac_allocation_data(ac) == -1
 		|| check_parsing(data, ac, av) == -1)

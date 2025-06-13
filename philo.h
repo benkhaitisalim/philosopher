@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/12 13:39:21 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/13 21:59:41 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <string.h>
+# include <stdbool.h>
 
 typedef struct s_data {
 	int				number_of_philosophers;
@@ -29,17 +30,22 @@ typedef struct s_data {
 	int				flag_stop_sumilation;
 	long			time_to_start;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	sleep_mutex;
+	pthread_mutex_t	think_mutex;
 	pthread_mutex_t	mutex_service;
 	int				seaters_on_table;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	protect_stop_sumilation;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	meals_mutex;
+	pthread_mutex_t	meals_mutexe;
 	struct t_philo	*philosophers;
 }	t_data;
 typedef struct t_philo{
 	int				id;
 	long			last_meals;
+	long			dead;
+
 	int				meals_eaten;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
@@ -66,5 +72,5 @@ void	print_(t_philo *philo, long time, char *message);
 void	*check_dead(void *ptr);
 int		most_meals_should_philo_eat(t_philo *philo);
 int		is_sumilation_ok(t_data *data);
-int		one_philo_rotine(t_data *data);
+void ft_time(t_data *data);
 #endif

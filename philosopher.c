@@ -6,42 +6,18 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:01:16 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/12 20:29:08 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/13 22:16:41 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*one_philo_rine(void *dat)
-{
-	t_philo *philo = (t_philo*)dat;
-	if (philo->data->number_of_philosophers == 1) 
-	{
-		print_(philo->data->philosophers,
-			philo->data->philosophers->data->time_to_start, "is thinking");
-		pthread_mutex_lock(philo->data->philosophers->right_fork);
-		print_(philo->data->philosophers, philo->data->philosophers->data->time_to_start,
-			"has taken a fork");
-		usleep(philo->data->philosophers->data->time_to_die * 1000);
-		print_(philo->data->philosophers,
-			philo->data->philosophers->data->time_to_start, "died");
-		pthread_mutex_unlock(philo->data->philosophers->right_fork);
-		return (NULL);
-	}
-	return NULL;
-}
 
 int	create_thread(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	// if(data->number_of_philosophers == 1)
-	// {
-	// 	pthread_create(&data->philosophers[0].thread, NULL,one_philo_rine, &data->philosophers[0]);
-	// 	pthread_join(data->philosophers[0].thread, NULL);
-	// 	return 0;
-	// }
 	while (i < data->number_of_philosophers)
 	{
 		if (pthread_create(&data->philosophers[i].thread, NULL,
@@ -62,7 +38,6 @@ int	join_pthread(t_data *data)
 	int	i;
 
 	i = 0;
-	data->time_to_start = get_current_time();
 	while (i < data->number_of_philosophers)
 	{
 		if (pthread_join(data->philosophers[i].thread, NULL) != 0)
@@ -82,6 +57,10 @@ void	free_pthread(t_data *data)
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
+	free(data->forks);
+	free(data->philosophers);
+
 	pthread_mutex_destroy(&data->meals_mutex);
+	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->protect_stop_sumilation);
 }
