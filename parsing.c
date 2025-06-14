@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 01:07:32 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/14 16:12:51 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/14 21:17:44 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	parsing(t_data *data, char **av, int ac)
 		if (data->most_meals_should_philo_eat <= 0)
 			return (-1);
 	}
-	data->seaters_on_table = 1;
 	data->time_to_start = get_current_time();
 	if (data->number_of_philosophers <= 0 || data->number_of_philosophers > 200)
 		return (-1);
