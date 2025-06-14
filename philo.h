@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/14 16:17:13 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/14 16:37:38 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_data {
 	pthread_mutex_t	think_mutex;
 	pthread_mutex_t	mutex_service;
 	int				seaters_on_table;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	timing_off_eat;
 	pthread_mutex_t	protect_stop_sumilation;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	meals_mutex;
