@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:16:35 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/13 21:57:55 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/14 16:06:13 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ long	get_current_time(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);	
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
 void	ft_usleep(long time)
 {
 	long	start;
+
 	start = get_current_time();
-	while(get_current_time() - start < time)
+	while (get_current_time() - start < time)
 	{
 		usleep(100);
 	}

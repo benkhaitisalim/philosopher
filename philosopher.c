@@ -6,16 +6,16 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:01:16 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/13 22:16:41 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/14 16:15:13 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
 int	create_thread(t_data *data)
 {
-	int	i;
+	int			i;
+	pthread_t	monitor;
 
 	i = 0;
 	while (i < data->number_of_philosophers)
@@ -25,11 +25,10 @@ int	create_thread(t_data *data)
 			return (-1);
 		i++;
 	}
-	pthread_t monitor;
-	if (pthread_create(&monitor, NULL,
-				check_dead, &data->philosophers[0]) != 0)
-	if (pthread_join(monitor,  NULL) != 0)
-			return (-1);
+	if (pthread_create(&monitor, NULL, check_dead, &data->philosophers[0]) != 0)
+		return (-1);
+	if (pthread_join(monitor, NULL) != 0)
+		return (-1);
 	return (0);
 }
 
@@ -59,7 +58,6 @@ void	free_pthread(t_data *data)
 	}
 	free(data->forks);
 	free(data->philosophers);
-
 	pthread_mutex_destroy(&data->meals_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->protect_stop_sumilation);

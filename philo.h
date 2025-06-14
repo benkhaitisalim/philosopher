@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/13 21:59:41 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/14 16:17:13 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int		init_philos(t_data *data);
 int		init_pthread_mutex(t_data *data);
 /* rotine philosopher*/
 void	*routine_philo(void *pointer);
+void	think(t_philo *philo, long curr);
+void	ft_sleep(t_philo *philo, long curr);
 int		create_thread(t_data *data);
 long	get_current_time(void);
 int		join_pthread(t_data *data);
@@ -72,5 +74,6 @@ void	print_(t_philo *philo, long time, char *message);
 void	*check_dead(void *ptr);
 int		most_meals_should_philo_eat(t_philo *philo);
 int		is_sumilation_ok(t_data *data);
-void ft_time(t_data *data);
+void	ft_time(t_data *data);
+
 #endif
