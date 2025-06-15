@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:07 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/15 16:10:57 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/15 21:29:52 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	eat(t_philo *philo)
 {
 	pthread_mutex_lock (&philo->meal_lock);
 	philo->last_meals = get_current_time();
+	philo->meals_eaten++;
 	pthread_mutex_unlock (&philo->meal_lock);
 	print_ (philo, philo->data->time_to_start, "is eating");
 	ft_usleep (philo->data->time_to_eat);
@@ -40,16 +41,17 @@ void	pick_up_forks(t_philo *philo)
 	print_ (philo, philo->data->time_to_start, "has taken a fork");
 }
 
-int	one_philo(t_philo *philo)
+void	*one_philo(t_philo *philo)
 {
 	if (philo->data->number_of_philosophers == 1)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		print_(philo, philo->data->time_to_start, "has taken a fork");
+		ft_usleep(philo->data->time_to_die);
 		pthread_mutex_unlock(philo->right_fork);
-		return (-1);
+		return (NULL);
 	}
-	return (1);
+	return (NULL);
 }
 
 void	*routine_philo(void *pointer)
@@ -58,13 +60,12 @@ void	*routine_philo(void *pointer)
 	long	curr;
 
 	philo = (t_philo *)pointer;
+	one_philo(philo);
 	if (philo->id % 2 == 0)
 		ft_usleep(philo->data->time_to_eat);
 	curr = philo->data->time_to_start;
 	while (is_sumilation_ok(philo->data))
 	{
-		if (one_philo(philo) == -1)
-			return (NULL);
 		pick_up_forks(philo);
 		eat(philo);
 		put_down_forks(philo);

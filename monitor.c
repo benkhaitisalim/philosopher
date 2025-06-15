@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:59:35 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/15 16:13:36 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/15 21:36:13 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	ft_dead(t_philo *philo)
 {
+	pthread_mutex_lock (&philo->data->print_mutex);
 	printf ("%zu %d %s\n",
 		get_current_time() - philo->data->time_to_start,
 		philo->id, "died");
+	pthread_mutex_unlock (&philo->data->print_mutex);
 }
 
 int	inside_the_monitor(t_philo *philo)
@@ -64,10 +66,14 @@ int	most_meals_should_philo_eat(t_philo *philo)
 	pthread_mutex_lock (&philo->data->meals_mutex);
 	if (philo->data->most_meals_should_philo_eat > 0)
 	{
-		philo->meals_eaten++;
-		if (philo->meals_eaten >= philo->data->most_meals_should_philo_eat)
+		if (philo->meals_eaten >= philo->data->most_meals_should_philo_eat 
+			&& !philo->is_full)
 		{
-			if (!philo->data->flag_stop_sumilation)
+			philo->data->philo_is_full++;
+			philo->is_full = 1;
+			if (philo->data->philo_is_full
+				== philo->data->most_meals_should_philo_eat 
+				&& !philo->data->flag_stop_sumilation)
 				philo->data->flag_stop_sumilation = 1;
 			pthread_mutex_unlock (&philo->data->meals_mutex);
 			return (-1);

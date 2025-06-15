@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/15 16:10:41 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/15 21:30:42 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data {
 }	t_data;
 typedef struct t_philo{
 	int				id;
+	int				is_full;
 	long			last_meals;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	meals_mutexe;
