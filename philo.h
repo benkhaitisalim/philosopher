@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:02:53 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/14 21:14:13 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/15 16:10:41 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_data {
 	pthread_mutex_t	mutex_service;
 	pthread_mutex_t	protect_stop_sumilation;
 	pthread_mutex_t	protect_stop_sumilation1;
-	pthread_mutex_t check_dead;
+	pthread_mutex_t	check_dead;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	meals_mutex;
 	struct t_philo	*philosophers;

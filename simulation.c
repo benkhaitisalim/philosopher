@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:39:07 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/14 20:50:29 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/15 16:10:57 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	*routine_philo(void *pointer)
 		think(philo, curr);
 		ft_sleep(philo, curr);
 		if (most_meals_should_philo_eat(philo) == -1)
-			break;
+			break ;
 	}
 	return (NULL);
 }

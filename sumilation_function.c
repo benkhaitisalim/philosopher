@@ -6,7 +6,7 @@
 /*   By: bsalim <bsalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:58:49 by bsalim            #+#    #+#             */
-/*   Updated: 2025/06/14 21:03:27 by bsalim           ###   ########.fr       */
+/*   Updated: 2025/06/15 16:11:17 by bsalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	is_sumilation_ok(t_data *data)
 void	print_(t_philo *philo, long time, char *message)
 {
 	pthread_mutex_lock (&philo->data->print_mutex);
-	if(!philo->data->flag_stop_sumilation)
-	{
+	if (!philo->data->flag_stop_sumilation)
 		printf ("%zu %d %s\n", get_current_time() - time, philo->id, message);
-	}
 	pthread_mutex_unlock (&philo->data->print_mutex);
 }
 
